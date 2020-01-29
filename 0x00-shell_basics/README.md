@@ -1,1 +1,1 @@
-The basic shell commands are found here.
+0. pwd -> shows path absolute path of direcory
