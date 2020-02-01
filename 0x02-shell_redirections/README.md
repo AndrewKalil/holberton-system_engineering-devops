@@ -1,0 +1,1 @@
+This directory contains the basic redirectory commands used for certain circumstances
