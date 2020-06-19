@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+i=1
+while [ $i -le 20 ]; do # -lt stands for less than or equal to
+    echo $i
+    case $i in
+        4) echo "bad luck from China"
+        ;;
+        9) echo "bad luck from Japan"
+        ;;
+        17) echo "bad luck from Italy"
+        ;;
+    esac
+    let i+=1;
+done
