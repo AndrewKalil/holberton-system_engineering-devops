@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# prints a text that ctrl + c cannot interrupt
+trap 'echo "I am invincible!!!"' SIGTERM
+on=True
+while [ $on ]; do
+    echo "To infinity and beyond"
+    sleep 2
+done
