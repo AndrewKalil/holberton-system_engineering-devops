@@ -1,23 +1,11 @@
 #!/usr/bin/env bash
 # configuring an nginx server with a custom 404 page that contains a string
 
-sudo apt-get -y update
-sudo apt-get -y install nginx
-sudo ufw allow 'Nginx HTTP'
+apt-get -y update
+apt-get -y install nginx
+ufw allow 'Nginx HTTP'
 echo 'Holberton School' > /var/www/html/index.nginx-debian.html
-sudo mkdir /var/www/error
-sudo touch /var/www/error/custom_404.html
-echo "Ceci n'est pas une page" > /var/www/error/custom_404.html
-
-svr="^server {$"
-rdrt="sever {\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\
-\n\terror_page 404 /custom_404.html;\
-\n\tlocation = /custom_404.html {\
-\n\t\troot /var/www/error;\
-\n\t\tinternal;\
-\n\t}"
-
-path="/etc/nginx/sites-available/default"
-sudo sed -i 's,'"$svr"','"$rdrt"',' "$path"
-
-sudo service nginx start
+sed -i '/listen 80 default_server;/a rewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;' /etc/nginx/sites-available/default
+echo "Ceci n'est pas une page" > /usr/share/nginx/html/custom_404.html
+sed -i '/server_name _;/a error_page 404 /custom_404.html;\nlocation = /custom_404.html {\nroot /usr/share/nginx/html;\ninternal;\n}' /etc/nginx/sites-available/default
+service nginx start
