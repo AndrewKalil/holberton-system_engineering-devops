@@ -4,7 +4,7 @@
 apt update -y
 apt install -y nginx
 echo "Holberton School" > /var/www/html/index.html
-RDRT="\\\trewrite ^/redirect_me https://github.com/davixcky permanent;"
+RDRT="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4"
 sed -i "24i $RDRT" /etc/nginx/sites-available/default
 NOT_FOUND="\\\terror_page 404 /404.html;\n\
         location = /404.html {\n\
