@@ -1,17 +1,24 @@
 #!/usr/bin/env bash
 # configuring an nginx server with a custom 404 page that contains a string
 
-apt update -y
-apt install -y nginx
-echo "Holberton School" > /var/www/html/index.html
-RDRT="\\\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4"
-sed -i "24i $RDRT" /etc/nginx/sites-available/default
-NOT_FOUND="\\\terror_page 404 /404.html;\n\
-        location = /404.html {\n\
-                root /var/www/html;\n\
-                internal;\
-        }"
-sed -i "26i $NOT_FOUND" /etc/nginx/sites-available/default
-STR="Ceci n'est pas une page"
-echo "${STR}" > /var/www/html/404.html
-service nginx restart
+sudo apt-get -y update
+sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
+sudo echo "Holberton School" | sudo tee -a /var/www/html/index.html
+
+sudo mkdir /var/www/error
+sudo touch /var/www/error/custom_404.html
+sudo echo "Ceci n'est pas une page" | sudo tee -a /var/www/error/custom_404.html
+
+srvr="^server {$"
+add="server {\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;\
+\n\terror_page 404 /custom_404.html;\
+\n\tlocation = /custom_404.html {\
+\n\t\troot /var/www/error;\
+\n\t\tinternal;\
+\n\t}"
+file="/etc/nginx/sites-available/default"
+
+sudo sed -i 's,'"$srvr"','"$add"',' "$file"
+
+sudo service nginx restart
