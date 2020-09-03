@@ -9,8 +9,6 @@
 # as designated in a particular file or component or in included license
 # documentation.  The authors of MySQL hereby grant you an additional
 # permission to link the program and your derivative works with the
-
-
 # separately licensed software that they have included with MySQL.
 #
 # This program is distributed in the hope that it will be useful,
@@ -27,7 +25,7 @@
 !includedir /etc/mysql/conf.d/
 !includedir /etc/mysql/mysql.conf.d/
 
-server-id = 2
-relay-log = /var/log/mysql/mysql-relay-bin.log
-log_bin = /var/log/mysql/mysql-bin.log
-binlog_do_db = tyrell_corp
+server-id	= 2
+relay-log   	= /var/log/mysql/mysql-relay-bin.log
+log_bin     	= /var/log/mysql/mysql-bin.log
+binlog_do_db 	= tyrell_corp
